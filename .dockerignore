@@ -1,0 +1,27 @@
+# Diretórios que não precisam ir para o container
+node_modules
+vendor
+storage/*.key
+storage/oauth-private.key
+storage/oauth-public.key
+storage/debugbar
+storage/logs
+storage/framework/cache/data/*
+storage/framework/sessions/*
+storage/framework/views/*
+
+# Ignorar arquivos de ambiente e config locais
+.env
+.env.*.local
+
+# Ignorar arquivos específicos de IDE e sistema operacional
+.DS_Store
+Thumbs.db
+*.log
+
+# Git
+.git
+.gitignore
+
+# Arquivos do VSCode
+.vscode

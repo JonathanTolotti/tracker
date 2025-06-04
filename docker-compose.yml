@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: tracker-app
+    container_name: tracker-app
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./src:/var/www
+    working_dir: /var/www
+    command: >
+      sh -c "
+        if [ -d '/var/www/storage' ] && [ -d '/var/www/bootstrap/cache' ]; then
+          chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache;
+          chmod -R u=rwx,g=rwx,o=rx /var/www/storage /var/www/bootstrap/cache;
+        else
+          echo 'AVISO: /var/www/storage ou /var/www/bootstrap/cache não encontrados durante a inicialização do container app.';
+        fi;
+        php-fpm
+      "
+    networks:
+      - tracker
+
+  web:
+    image: nginx:alpine
+    container_name: tracker-nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - ./src:/var/www
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - tracker
+
+  db:
+    image: mysql:8.0
+    container_name: tracker-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tracker
+      MYSQL_USER: tracker
+      MYSQL_PASSWORD: tracker
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - tracker
+
+volumes:
+  dbdata:
+
+networks:
+  tracker:
