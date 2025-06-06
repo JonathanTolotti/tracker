@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Services\Interfaces\ApiServiceInterface;
+use App\Services\Contracts\ApiServiceInterface;
 use http\Exception\RuntimeException;
 use Illuminate\Config\Repository;
 use Illuminate\Support\Collection;

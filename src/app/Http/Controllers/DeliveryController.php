@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Interfaces\ApiServiceInterface;
+use App\Services\Contracts\ApiServiceInterface;
 use Illuminate\Http\Request;
 
 class DeliveryController extends Controller
@@ -15,6 +15,6 @@ class DeliveryController extends Controller
     }
     public function index()
     {
-       return $this->apiService->fetchAllCarriers();
+       return View('delivery.index');
     }
 }
