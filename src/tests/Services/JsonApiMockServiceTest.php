@@ -60,8 +60,8 @@ class JsonApiMockServiceTest extends TestCase
         $deliveries = $apiService->fetchAllDeliveries();
 
         $this->assertNotNull($deliveries);
-        $this->assertEquals(1, $deliveries->values('status')[0]);
-        $this->assertEquals(200, $deliveries->values('status')[1]);
+        $this->assertEquals(["_id" => "delivery1"], $deliveries->values('status')[0]);
+        $this->assertEquals(["_id" => "delivery2"], $deliveries->values('status')[1]);
     }
 
     public function test_fetch_all_carriers_returns_data_from_json(): void
@@ -81,7 +81,7 @@ class JsonApiMockServiceTest extends TestCase
         $carriers = $apiService->fetchAllDeliveries();
 
         $this->assertNotNull($carriers);
-        $this->assertEquals(1, $carriers->values('status')[0]);
-        $this->assertEquals(200, $carriers->values('status')[1]);
+        $this->assertEquals(["_id" => "carrier1"], $carriers->values('status')[0]);
+        $this->assertEquals(["_id" => "carrier2"], $carriers->values('status')[1]);
     }
 }
