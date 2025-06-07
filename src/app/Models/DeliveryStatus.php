@@ -23,23 +23,6 @@ class DeliveryStatus extends Model
         'event_timestamp' => 'datetime',
     ];
 
-    protected static function booted(): void
-    {
-        static::creating(function ($carrier) {
-            $carrier->uuid = Str::uuid();
-        });
-    }
-
-    /**
-     * Informamos ao Laravel que vamos usar o uuid como identificador
-     *
-     * @return string
-     */
-    public function getRouteKeyName(): string
-    {
-        return 'uuid';
-    }
-
     /**
      * Busca a entrega que tem os eventos
      */

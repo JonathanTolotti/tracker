@@ -7,20 +7,18 @@ use App\Repository\Contracts\CarrierRepositoryInterface;
 
 class CarrierRepository implements CarrierRepositoryInterface
 {
-
     /**
-     * Busca a transportadora pelo UUID
+     * Cria uma nova transportadora
      *
-     * @param string $uuid
-     * @return Carrier|null
+     * @param array $carrierToCreate
+     * @return Carrier
      */
-    public function findByUuid(string $uuid): ?Carrier
+    public function firstOrCreate(array $carrierToCreate): Carrier
     {
-        return Carrier::query()->where('uuid', $uuid)->first();
-    }
-
-    public function create(array $carrierToCreate): Carrier
-    {
-        return  Carrier::query()->create($carrierToCreate);
+        return  Carrier::query()->firstOrCreate([
+            'uuid' =>  $carrierToCreate['_id'],
+            'name' => $carrierToCreate['_fantasia'],
+            'cnpj' => $carrierToCreate['_cnpj'],
+        ]);
     }
 }

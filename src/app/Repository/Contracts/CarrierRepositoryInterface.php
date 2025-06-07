@@ -6,7 +6,5 @@ use App\Models\Carrier;
 
 interface CarrierRepositoryInterface
 {
-    public function findByUuid(string $uuid): ?Carrier;
-
-    public function create(array $carrierToCreate): Carrier;
+    public function firstOrCreate(array $carrierToCreate): Carrier;
 }

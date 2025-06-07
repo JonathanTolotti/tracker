@@ -6,7 +6,5 @@ use App\Models\Recipient;
 
 interface RecipientRepositoryInterface
 {
-    public function findByCpf(string $cpf): ?Recipient;
-
-    public function create(array $recipientToCreate): Recipient;
+    public function firstOrCreate(array $recipientToCreate): Recipient;
 }

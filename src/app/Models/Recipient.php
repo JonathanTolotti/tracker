@@ -10,9 +10,10 @@ use Illuminate\Support\Str;
 
 class Recipient extends Model
 {
-    use HasFactory, HasUuids;
+    use HasFactory;
 
     protected $fillable = [
+        'uuid',
         'name',
         'cpf',
     ];
@@ -27,16 +28,6 @@ class Recipient extends Model
         static::creating(function ($carrier) {
             $carrier->uuid = Str::uuid();
         });
-    }
-
-    /**
-     * Informamos ao Laravel que vamos usar o uuid como identificador
-     *
-     * @return string
-     */
-    public function getRouteKeyName(): string
-    {
-        return 'uuid';
     }
 
     /**

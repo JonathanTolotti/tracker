@@ -12,7 +12,7 @@ class Delivery extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id',
+        'uuid',
         'volumes',
         'carrier_id',
         'sender_id',
@@ -45,7 +45,7 @@ class Delivery extends Model
      */
     public function recipient(): BelongsTo
     {
-        return $this->belongsTo(Recipient::class);
+        return $this->belongsTo(Recipient::class, 'recipient_id');
     }
 
     /**

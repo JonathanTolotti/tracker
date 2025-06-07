@@ -10,24 +10,13 @@ use Illuminate\Support\Str;
 
 class Carrier extends Model
 {
-    use HasFactory, HasUuids;
+    use HasFactory;
 
     protected $fillable = [
+        'uuid',
         'name',
         'cnpj',
     ];
-
-    /**
-     * Gera um UUID quando um registro for criado
-     *
-     * @return void
-     */
-    protected static function booted(): void
-    {
-        static::creating(function ($carrier) {
-            $carrier->uuid = Str::uuid();
-        });
-    }
 
     /**
      * Informamos ao Laravel que vamos usar o uuid como identificador

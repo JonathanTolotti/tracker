@@ -11,11 +11,12 @@ use Illuminate\Support\Str;
 
 class RecipientAddress extends Model
 {
-    use HasFactory, HasUuids;
+    use HasFactory;
 
     protected $table = 'recipient_addresses';
 
     protected $fillable = [
+        'uuid',
         'recipient_id',
         'street',
         'state',

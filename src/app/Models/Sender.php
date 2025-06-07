@@ -10,9 +10,10 @@ use Illuminate\Support\Str;
 
 class Sender extends Model
 {
-    use HasFactory, HasUuids;
+    use HasFactory;
 
     protected $fillable = [
+        'uuid',
         'name',
     ];
 

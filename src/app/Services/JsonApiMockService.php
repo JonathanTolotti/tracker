@@ -33,7 +33,9 @@ class JsonApiMockService implements ApiServiceInterface
     public function fetchAllDeliveries(): Collection
     {
         $jsonContent = File::get($this->deliveriesJsonPath);
-        return collect(json_decode($jsonContent, true));
+        $decodedData = json_decode($jsonContent, true);
+
+        return collect($decodedData['data'] ?? []);
     }
 
     /**
@@ -44,6 +46,38 @@ class JsonApiMockService implements ApiServiceInterface
     public function fetchAllCarriers(): Collection
     {
         $jsonContent = File::get($this->carriersJsonPath);
-        return collect(json_decode($jsonContent, true));
+        $decodedData = json_decode($jsonContent, true);
+
+        return collect($decodedData['data'] ?? []);
+    }
+
+    /**
+     * Filtra nas entregas pelo CPF informado
+     *
+     * @param string $cpf
+     * @return Collection
+     */
+    public function findDeliveriesByCpf(string $cpf):Collection
+    {
+        $allDeliveries = $this->fetchAllDeliveries();
+        $filteredDeliveries = collect();
+
+        if ($allDeliveries->isNotEmpty()) {
+            return $allDeliveries->where('_destinatario._cpf', $cpf)->values();
+        }
+
+        return $filteredDeliveries;
+    }
+
+    public function findCarrierById(string $uuid): Collection
+    {
+        $allCarriers = $this->fetchAllCarriers();
+        $filteredCarrier = collect();
+
+        if ($allCarriers->isNotEmpty()) {
+            return $allCarriers->where('_id', $uuid)->values();
+        }
+
+        return $filteredCarrier;
     }
 }
