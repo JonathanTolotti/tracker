@@ -24,6 +24,11 @@ class Delivery extends Model
         'volumes' => 'integer',
     ];
 
+    public function getRouteKeyName(): string
+    {
+        return 'uuid';
+    }
+
     /**
      * Busca a transportadora da entrega
      */

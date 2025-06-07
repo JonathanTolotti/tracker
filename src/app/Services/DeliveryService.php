@@ -38,6 +38,7 @@ class DeliveryService
         $deliveries = $this->apiService->findDeliveriesByCpf($cpf);
         $persistedDeliveries = new Collection();
 
+        DB::transaction(function () use ($deliveries, &$persistedDeliveries) {
             $deliveries->each(function ($deliveryData) use (&$persistedDeliveries) {
                 try {
                     $carrier = $this->carrierService->findOrCreate($deliveryData['_id_transportadora']);
@@ -47,11 +48,11 @@ class DeliveryService
                     $recipientAddress = $deliveryData['_destinatario'];
 
                     $address = $this->recipientService->findOrCreateForRecipient($recipient, [
-                        'street'    => $recipientAddress['_endereco'],
-                        'state'     => $recipientAddress['_estado'],
-                        'zip_code'  => $recipientAddress['_cep'],
-                        'country'   => $recipientAddress['_pais'],
-                        'latitude'  => $recipientAddress['_geolocalizao']['_lat'],
+                        'street' => $recipientAddress['_endereco'],
+                        'state' => $recipientAddress['_estado'],
+                        'zip_code' => $recipientAddress['_cep'],
+                        'country' => $recipientAddress['_pais'],
+                        'latitude' => $recipientAddress['_geolocalizao']['_lat'],
                         'longitude' => $recipientAddress['_geolocalizao']['_lng'],
                     ]);
 
@@ -59,22 +60,22 @@ class DeliveryService
                     $delivery = $this->deliveryRepository->firstOrCreate(
                         [
                             'uuid' => $deliveryData['_id'],
-                            'carrier_id'           => $carrier->id,
-                            'sender_id'            => $sender->id,
-                            'recipient_id'         => $recipient->id,
+                            'carrier_id' => $carrier->id,
+                            'sender_id' => $sender->id,
+                            'recipient_id' => $recipient->id,
                             'recipient_address_id' => $address->id,
-                            'volumes'              => $deliveryData['_volumes'],
+                            'volumes' => $deliveryData['_volumes'],
                         ]
                     );
-                        $statusesData = array_map(function ($event) use ($delivery) {
-                            return [
-                                'delivery_id'     => $delivery->id,
-                                'message'         => $event['message'],
-                                'event_timestamp' => Carbon::parse($event['date']),
-                            ];
-                        }, $deliveryData['_rastreamento']);
+                    $statusesData = array_map(function ($event) use ($delivery) {
+                        return [
+                            'delivery_id' => $delivery->id,
+                            'message' => $event['message'],
+                            'event_timestamp' => Carbon::parse($event['date']),
+                        ];
+                    }, $deliveryData['_rastreamento']);
 
-                     $delivery->statuses()->upsert($statusesData, ['delivery_id', 'event_timestamp', 'message']);
+                    $delivery->statuses()->upsert($statusesData, ['delivery_id', 'event_timestamp', 'message']);
 
                     $delivery->load(['carrier', 'sender', 'recipient', 'shippingAddress', 'statuses']);
 
@@ -86,7 +87,7 @@ class DeliveryService
                     throw $e;
                 }
             });
-
+        });
             return $persistedDeliveries;
     }
 

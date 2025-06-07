@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Delivery;
 use App\Services\TrackingService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -17,14 +18,14 @@ class TrackingController extends Controller
     }
     public function index(Request $request): View
     {
-        $cpfToSearch = $request->get('search_term');
+        $cpfToSearch = $request->get('cpf');
         $foundDeliveries = collect();
 
         if ($cpfToSearch) {
             try {
                 $foundDeliveries = $this->trackingService->findOrCreateDeliveriesByCpf($cpfToSearch);
             } catch (\Exception $e) {
-                Log::error('Error during delivery search: ' . $e->getMessage());
+                Log::error('Erro ao realizar a busca: ' . $e->getMessage());
             }
         }
 
@@ -32,5 +33,15 @@ class TrackingController extends Controller
             'searchTerm' => $cpfToSearch,
             'foundDeliveries' => $foundDeliveries,
         ]);
+    }
+
+    public function show(Delivery $delivery): View
+    {
+        $delivery->load(['carrier', 'sender', 'recipient', 'shippingAddress', 'statuses']);
+
+        return view('tracking.show', [
+            'detailedDelivery' => $delivery
+        ]);
+
     }
 }

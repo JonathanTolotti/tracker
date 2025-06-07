@@ -8,4 +8,5 @@ Route::get('/', function () {
 });
 
 Route::get('/tracking', [TrackingController::class, 'index'])->name('tracking.index');
+Route::get('/tracking/{delivery}', [TrackingController::class, 'show'])->name('tracking.show');
 
