@@ -41,12 +41,15 @@ class CreateDeliveryAction
     public function execute(string $cpf): Collection
     {
         $deliveries = $this->apiService->findDeliveriesByCpf($cpf);
+
+        // Buscamos todas as transportadoras e depois filtamos conforme a entrega, evitando ler o endpoint dentro de um laço
+        $carriers = $this->apiService->fetchAllCarriers();
         $persistedDeliveries = new Collection;
 
-        DB::transaction(function () use ($deliveries, &$persistedDeliveries) {
-            $deliveries->each(function ($deliveryData) use (&$persistedDeliveries) {
+        DB::transaction(function () use ($deliveries, $carriers, &$persistedDeliveries) {
+            $deliveries->each(function ($deliveryData) use ($carriers, &$persistedDeliveries) {
                 try {
-                    $carrier = $this->carrierService->findOrCreate($deliveryData['_id_transportadora']);
+                    $carrier = $this->carrierService->firstOrCreate($carriers->where('_id', $deliveryData['_id_transportadora'])->first());
                     $sender = $this->senderService->findOrCreateByName($deliveryData['_remetente']['_nome']);
                     $recipient = $this->recipientService->findOrCreateByCpf($deliveryData['_destinatario']);
 

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('message');
             $table->timestamp('event_timestamp');
             $table->timestamps();
+            $table->unique(['delivery_id', 'event_timestamp', 'message'], 'delivery_status_unique');
         });
     }
 

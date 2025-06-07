@@ -62,19 +62,4 @@ class JsonApiMockService implements ApiServiceInterface
 
         return $filteredDeliveries;
     }
-
-    /**
-     * Busca a transportadora pelo ID
-     */
-    public function findCarrierById(string $uuid): Collection
-    {
-        $allCarriers = $this->fetchAllCarriers();
-        $filteredCarrier = collect();
-
-        if ($allCarriers->isNotEmpty()) {
-            return $allCarriers->where('_id', $uuid)->values();
-        }
-
-        return $filteredCarrier;
-    }
 }

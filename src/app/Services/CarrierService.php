@@ -20,10 +20,8 @@ class CarrierService
         $this->apiService = $apiService;
     }
 
-    public function findOrCreate(string $uuid): Carrier
+    public function firstOrCreate(array $data): Carrier
     {
-        $carrier = $this->apiService->findCarrierById($uuid);
-
-        return $this->carrierRepository->firstOrCreate($carrier->first());
+        return $this->carrierRepository->firstOrCreate($data);
     }
 }
