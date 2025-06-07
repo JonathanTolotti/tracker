@@ -2,6 +2,7 @@
 
 namespace App\Actions;
 
+use App\Repository\Contracts\DeliveryRepositoryInterface;
 use App\Repository\DeliveryRepository;
 use App\Services\CarrierService;
 use App\Services\Contracts\ApiServiceInterface;
@@ -29,7 +30,7 @@ class CreateDeliveryAction
         CarrierService $carrierService,
         SenderService $senderService,
         RecipientService $recipientService,
-        DeliveryRepository $deliveryRepository
+        DeliveryRepositoryInterface $deliveryRepository
     ) {
         $this->apiService = $apiService;
         $this->carrierService = $carrierService;
