@@ -84,5 +84,4 @@ class JsonApiMockServiceTest extends TestCase
         $this->assertEquals(1, $carriers->values('status')[0]);
         $this->assertEquals(200, $carriers->values('status')[1]);
     }
-
 }

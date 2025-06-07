@@ -9,13 +9,13 @@ use App\Services\Contracts\ApiServiceInterface;
 class CarrierService
 {
     protected CarrierRepository $carrierRepository;
+
     protected ApiServiceInterface $apiService;
 
     public function __construct(
         CarrierRepository $carrierRepository,
         ApiServiceInterface $apiService
-    )
-    {
+    ) {
         $this->carrierRepository = $carrierRepository;
         $this->apiService = $apiService;
     }

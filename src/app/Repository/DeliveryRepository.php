@@ -3,18 +3,13 @@
 namespace App\Repository;
 
 use App\Models\Delivery;
-use App\Models\Recipient;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
 
 class DeliveryRepository
 {
     /**
      * Cria uma nova entrega
-     *
-     * @param array $data
-     * @return Delivery
      */
     public function firstOrCreate(array $data): Delivery
     {
@@ -28,7 +23,7 @@ class DeliveryRepository
             'sender',
             'recipient',
             'shippingAddress',
-            'statuses'
+            'statuses',
         ])->whereHas('recipient', function (Builder $query) use ($cpf) {
             $query->where('cpf', $cpf);
         })->get();

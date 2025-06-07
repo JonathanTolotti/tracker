@@ -22,7 +22,7 @@ class SearchDeliveryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cpf'=>'required|min:11|max:11|integer',
+            'cpf' => 'required|min:11|max:11|integer',
         ];
     }
 }

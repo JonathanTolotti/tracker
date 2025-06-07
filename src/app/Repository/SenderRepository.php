@@ -7,12 +7,8 @@ use App\Repository\Contracts\SenderRepositoryInterface;
 
 class SenderRepository implements SenderRepositoryInterface
 {
-
     /**
      * Cria um novo remetente
-     *
-     * @param array $senderToCreate
-     * @return Sender
      */
     public function firstOrCreate(array $senderToCreate): Sender
     {

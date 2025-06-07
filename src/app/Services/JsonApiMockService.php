@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Log;
 class JsonApiMockService implements ApiServiceInterface
 {
     private string $carriersJsonPath;
+
     private string $deliveriesJsonPath;
 
     public function __construct(Repository $config)
@@ -27,8 +28,6 @@ class JsonApiMockService implements ApiServiceInterface
 
     /**
      * Retorna todas as entregas mockadas do json
-     *
-     * @return Collection
      */
     public function fetchAllDeliveries(): Collection
     {
@@ -40,8 +39,6 @@ class JsonApiMockService implements ApiServiceInterface
 
     /**
      * Retorna todas as transportadoras mockadas no json
-     *
-     * @return Collection
      */
     public function fetchAllCarriers(): Collection
     {
@@ -53,11 +50,8 @@ class JsonApiMockService implements ApiServiceInterface
 
     /**
      * Filtra nas entregas pelo CPF informado
-     *
-     * @param string $cpf
-     * @return Collection
      */
-    public function findDeliveriesByCpf(string $cpf):Collection
+    public function findDeliveriesByCpf(string $cpf): Collection
     {
         $allDeliveries = $this->fetchAllDeliveries();
         $filteredDeliveries = collect();
@@ -71,9 +65,6 @@ class JsonApiMockService implements ApiServiceInterface
 
     /**
      * Busca a transportadora pelo ID
-     *
-     * @param string $uuid
-     * @return Collection
      */
     public function findCarrierById(string $uuid): Collection
     {

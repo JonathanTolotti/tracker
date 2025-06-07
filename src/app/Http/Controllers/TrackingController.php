@@ -16,6 +16,7 @@ class TrackingController extends Controller
     {
         $this->trackingService = $trackingService;
     }
+
     public function index(Request $request): View
     {
         $cpfToSearch = $request->get('cpf');
@@ -25,7 +26,7 @@ class TrackingController extends Controller
             try {
                 $foundDeliveries = $this->trackingService->findOrCreateDeliveriesByCpf($cpfToSearch);
             } catch (\Exception $e) {
-                Log::error('Erro ao realizar a busca: ' . $e->getMessage());
+                Log::error('Erro ao realizar a busca: '.$e->getMessage());
             }
         }
 
@@ -40,7 +41,7 @@ class TrackingController extends Controller
         $delivery->load(['carrier', 'sender', 'recipient', 'shippingAddress', 'statuses']);
 
         return view('tracking.show', [
-            'detailedDelivery' => $delivery
+            'detailedDelivery' => $delivery,
         ]);
 
     }

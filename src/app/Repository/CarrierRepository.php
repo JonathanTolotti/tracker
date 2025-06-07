@@ -9,14 +9,11 @@ class CarrierRepository implements CarrierRepositoryInterface
 {
     /**
      * Cria uma nova transportadora
-     *
-     * @param array $carrierToCreate
-     * @return Carrier
      */
     public function firstOrCreate(array $carrierToCreate): Carrier
     {
-        return  Carrier::query()->firstOrCreate([
-            'uuid' =>  $carrierToCreate['_id'],
+        return Carrier::query()->firstOrCreate([
+            'uuid' => $carrierToCreate['_id'],
             'name' => $carrierToCreate['_fantasia'],
             'cnpj' => $carrierToCreate['_cnpj'],
         ]);

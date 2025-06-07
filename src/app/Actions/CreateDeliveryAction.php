@@ -15,9 +15,13 @@ use Illuminate\Support\Facades\Log;
 class CreateDeliveryAction
 {
     protected ApiServiceInterface $apiService;
+
     protected CarrierService $carrierService;
+
     protected SenderService $senderService;
+
     protected RecipientService $recipientService;
+
     protected DeliveryRepository $deliveryRepository;
 
     public function __construct(
@@ -26,8 +30,7 @@ class CreateDeliveryAction
         SenderService $senderService,
         RecipientService $recipientService,
         DeliveryRepository $deliveryRepository
-    )
-    {
+    ) {
         $this->apiService = $apiService;
         $this->carrierService = $carrierService;
         $this->senderService = $senderService;
@@ -38,7 +41,7 @@ class CreateDeliveryAction
     public function execute(string $cpf): Collection
     {
         $deliveries = $this->apiService->findDeliveriesByCpf($cpf);
-        $persistedDeliveries = new Collection();
+        $persistedDeliveries = new Collection;
 
         DB::transaction(function () use ($deliveries, &$persistedDeliveries) {
             $deliveries->each(function ($deliveryData) use (&$persistedDeliveries) {
@@ -57,7 +60,6 @@ class CreateDeliveryAction
                         'latitude' => $recipientAddress['_geolocalizao']['_lat'],
                         'longitude' => $recipientAddress['_geolocalizao']['_lng'],
                     ]);
-
 
                     $delivery = $this->deliveryRepository->firstOrCreate(
                         [
@@ -84,7 +86,7 @@ class CreateDeliveryAction
                     $persistedDeliveries->push($delivery);
 
                 } catch (\Exception $e) {
-                    Log::error("Falha ao sincronizar entrega com API ID {$deliveryData['_id']}: " . $e->getMessage());
+                    Log::error("Falha ao sincronizar entrega com API ID {$deliveryData['_id']}: ".$e->getMessage());
                     throw $e;
                 }
             });
@@ -93,5 +95,4 @@ class CreateDeliveryAction
         return $persistedDeliveries;
 
     }
-
 }

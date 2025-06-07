@@ -17,6 +17,7 @@ class SenderService
     public function findOrCreateByName(string $name): Sender
     {
         $name = trim(ucwords($name));
+
         return $this->senderRepository->firstOrCreate([
             'name' => $name,
         ]);

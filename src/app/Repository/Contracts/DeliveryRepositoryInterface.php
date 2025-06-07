@@ -12,5 +12,4 @@ interface DeliveryRepositoryInterface
     public function findByRecipientId(int $recipientId): Collection;
 
     public function create(array $data): Delivery;
-
 }
