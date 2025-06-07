@@ -46,8 +46,8 @@ class CreateDeliveryAction
         $carriers = $this->apiService->fetchAllCarriers();
         $persistedDeliveries = new Collection;
 
-        DB::transaction(function () use ($deliveries, $carriers, &$persistedDeliveries) {
-            $deliveries->each(function ($deliveryData) use ($carriers, &$persistedDeliveries) {
+        DB::transaction(function () use ($deliveries, $carriers, &$persistedDeliveries): void {
+            $deliveries->each(function ($deliveryData) use ($carriers, &$persistedDeliveries): void {
                 try {
                     $carrier = $this->carrierService->firstOrCreate($carriers->where('_id', $deliveryData['_id_transportadora'])->first());
                     $sender = $this->senderService->findOrCreateByName($deliveryData['_remetente']['_nome']);

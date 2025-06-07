@@ -21,7 +21,7 @@ class Sender extends Model
      */
     protected static function booted(): void
     {
-        static::creating(function ($carrier) {
+        static::creating(function ($carrier): void {
             $carrier->uuid = Str::uuid();
         });
     }

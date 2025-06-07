@@ -24,7 +24,7 @@ class DeliveryRepository
             'recipient',
             'shippingAddress',
             'statuses',
-        ])->whereHas('recipient', function (Builder $query) use ($cpf) {
+        ])->whereHas('recipient', function (Builder $query) use ($cpf): void {
             $query->where('cpf', $cpf);
         })->get();
     }
