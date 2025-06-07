@@ -23,6 +23,12 @@ class TrackingService
         $this->deliveryService = $deliveryService;
     }
 
+    /**
+     * Se a entrega já existir no DB ela é retornada, caso contrário, consultamos a api e criamos.
+     *
+     * @param string $cpf
+     * @return Collection
+     */
     public function findOrCreateDeliveriesByCpf(string $cpf): Collection
     {
         $deliveries = $this->deliveryService->getDeliveryByCpf($cpf);
