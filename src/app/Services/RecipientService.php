@@ -4,13 +4,13 @@ namespace App\Services;
 
 use App\Models\Recipient;
 use App\Models\RecipientAddress;
-use App\Repository\RecipientRepository;
+use App\Repository\Contracts\RecipientRepositoryInterface;
 
 class RecipientService
 {
-    protected RecipientRepository $recipientRepository;
+    protected RecipientRepositoryInterface $recipientRepository;
 
-    public function __construct(RecipientRepository $recipientRepository)
+    public function __construct(RecipientRepositoryInterface $recipientRepository)
     {
         $this->recipientRepository = $recipientRepository;
     }

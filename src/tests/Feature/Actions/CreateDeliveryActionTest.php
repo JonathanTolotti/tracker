@@ -64,7 +64,7 @@ class CreateDeliveryActionTest extends TestCase
         $action = $this->app->make(CreateDeliveryAction::class);
         $result = $action->execute($cpf);
 
-        $this->assertInstanceOf(Collection::class, $result );
+        $this->assertInstanceOf(Collection::class, $result);
         $this->assertCount(1, $result);
 
         $persistedDelivery = $result->first();
@@ -83,30 +83,30 @@ class CreateDeliveryActionTest extends TestCase
 
         $this->assertDatabaseCount('senders', 1);
         $this->assertDatabaseHas('senders', [
-            'name' => 'Test Sender'
+            'name' => 'Test Sender',
         ]);
 
         $this->assertDatabaseCount('recipients', 1);
         $this->assertDatabaseHas('recipients', [
             'cpf' => $cpf,
-            'name' => 'Test Recipient'
+            'name' => 'Test Recipient',
         ]);
 
         $this->assertDatabaseCount('recipient_addresses', 1);
         $this->assertDatabaseHas('recipient_addresses', [
             'street' => '123 Test St',
-            'state' => 'TS'
+            'state' => 'TS',
         ]);
 
         $this->assertDatabaseCount('deliveries', 1);
         $this->assertDatabaseHas('deliveries', [
             'uuid' => 'delivery-uuid-1',
-            'volumes' => 2
+            'volumes' => 2,
         ]);
 
         $this->assertDatabaseCount('delivery_statuses', 1);
         $this->assertDatabaseHas('delivery_statuses', [
-            'message' => 'ENTREGA CRIADA'
+            'message' => 'ENTREGA CRIADA',
         ]);
 
     }

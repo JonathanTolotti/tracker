@@ -3,13 +3,13 @@
 namespace App\Services;
 
 use App\Models\Sender;
-use App\Repository\SenderRepository;
+use App\Repository\Contracts\SenderRepositoryInterface;
 
 class SenderService
 {
-    protected SenderRepository $senderRepository;
+    protected SenderRepositoryInterface $senderRepository;
 
-    public function __construct(SenderRepository $senderRepository)
+    public function __construct(SenderRepositoryInterface $senderRepository)
     {
         $this->senderRepository = $senderRepository;
     }

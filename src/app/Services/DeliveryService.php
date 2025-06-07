@@ -3,17 +3,17 @@
 namespace App\Services;
 
 use App\Actions\CreateDeliveryAction;
-use App\Repository\DeliveryRepository;
+use App\Repository\Contracts\DeliveryRepositoryInterface;
 use Illuminate\Support\Collection;
 
 class DeliveryService
 {
-    protected DeliveryRepository $deliveryRepository;
+    protected DeliveryRepositoryInterface $deliveryRepository;
 
     protected CreateDeliveryAction $createDeliveryAction;
 
     public function __construct(
-        DeliveryRepository $deliveryRepository,
+        DeliveryRepositoryInterface $deliveryRepository,
         CreateDeliveryAction $createDeliveryAction
     ) {
         $this->deliveryRepository = $deliveryRepository;

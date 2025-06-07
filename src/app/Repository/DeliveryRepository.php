@@ -3,10 +3,11 @@
 namespace App\Repository;
 
 use App\Models\Delivery;
+use App\Repository\Contracts\DeliveryRepositoryInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 
-class DeliveryRepository
+class DeliveryRepository implements DeliveryRepositoryInterface
 {
     /**
      * Cria uma nova entrega

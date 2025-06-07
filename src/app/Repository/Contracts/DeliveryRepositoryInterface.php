@@ -7,9 +7,7 @@ use Illuminate\Support\Collection;
 
 interface DeliveryRepositoryInterface
 {
-    public function findByUuid(string $uuid): ?Delivery;
+    public function firstOrCreate(array $data): Delivery;
 
-    public function findByRecipientId(int $recipientId): Collection;
-
-    public function create(array $data): Delivery;
+    public function findByRecipientCpf(string $cpf): ?Collection;
 }

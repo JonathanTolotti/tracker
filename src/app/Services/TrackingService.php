@@ -6,19 +6,11 @@ use Illuminate\Support\Collection;
 
 class TrackingService
 {
-    protected CarrierService $carrierService;
-
-    protected RecipientService $recipientService;
-
     protected DeliveryService $deliveryService;
 
     public function __construct(
-        CarrierService $carrierService,
-        RecipientService $recipientService,
         DeliveryService $deliveryService
     ) {
-        $this->carrierService = $carrierService;
-        $this->recipientService = $recipientService;
         $this->deliveryService = $deliveryService;
     }
 

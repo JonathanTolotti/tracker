@@ -3,21 +3,16 @@
 namespace App\Services;
 
 use App\Models\Carrier;
-use App\Repository\CarrierRepository;
-use App\Services\Contracts\ApiServiceInterface;
+use App\Repository\Contracts\CarrierRepositoryInterface;
 
 class CarrierService
 {
-    protected CarrierRepository $carrierRepository;
-
-    protected ApiServiceInterface $apiService;
+    protected CarrierRepositoryInterface $carrierRepository;
 
     public function __construct(
-        CarrierRepository $carrierRepository,
-        ApiServiceInterface $apiService
+        CarrierRepositoryInterface $carrierRepository
     ) {
         $this->carrierRepository = $carrierRepository;
-        $this->apiService = $apiService;
     }
 
     public function firstOrCreate(array $data): Carrier
