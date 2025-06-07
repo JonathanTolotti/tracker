@@ -6,10 +6,10 @@
     <section class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg border border-gray-200 p-6 sm:p-8">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 pb-4 border-b border-gray-200">
             <div>
-                <h2 class="text-3xl font-bold text-blue-800">Detalhes da Entrega</h2>
+                <h2 class="text-3xl font-bold text-orange-600">Detalhes da Entrega</h2>
                 <p class="text-sm text-gray-500 font-mono mt-1">ID: {{ $detailedDelivery->uuid }}</p>
             </div>
-            <a href="{{ route('tracking.index') }}" class="mt-4 sm:mt-0 inline-block bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg text-sm transition-colors">
+            <a href="{{ route('tracking.index') }}" class="mt-4 sm:mt-0 inline-block bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors">
                 &laquo; Fazer Nova Busca
             </a>
         </div>

@@ -9,7 +9,7 @@
 <body class="bg-gray-100 antialiased">
 <div class="container mx-auto px-4 py-8">
     <header class="text-center mb-12">
-        <h1 class="text-4xl font-bold text-blue-700">Rastreamento de Entregas</h1>
+        <h1 class="text-4xl font-bold text-orange-600">Rastreamento de Entregas</h1>
         <p class="text-lg text-gray-600 mt-2">Consulte o status da sua entrega de forma rápida e fácil.</p>
     </header>
 

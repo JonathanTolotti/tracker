@@ -22,7 +22,7 @@
 
             <button
                 type="submit"
-                class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 text-center transition-colors duration-200"
+                class="w-full text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 text-center transition-colors duration-200"
             >
                 Buscar Entrega
             </button>
@@ -38,11 +38,11 @@
 
             <div class="space-y-6">
                 @foreach ($foundDeliveries as $delivery)
-                    <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden transition hover:shadow-xl hover:border-blue-300">
+                    <div class="bg-white rounded-xl shadow-lg border border-orange-200 overflow-hidden transition hover:shadow-xl hover:border-orange-300">
                         <div class="p-6 border-b border-gray-200">
                             <div class="flex flex-col sm:flex-row justify-between items-start">
                                 <div>
-                                    <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-blue-600 bg-blue-200">
+                                    <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-orange-600 bg-orange-200">
                                         Entrega
                                     </span>
                                     <h3 class="text-xl font-bold text-gray-900 mt-2">
@@ -79,7 +79,7 @@
 
                         <div class="bg-gray-50 px-6 py-4 text-right">
                             <a href="{{ route('tracking.show', ['delivery' => $delivery->uuid]) }}"
-                               class="inline-block bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors duration-200 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
+                               class="inline-block bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors duration-200 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
                             >
                                 Ver Detalhes Completos
                             </a>
